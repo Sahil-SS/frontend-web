@@ -179,3 +179,7 @@ const Services = () => {
 };
 
 export default Services;
+
+
+
+// Whenever we hover on any card it should get a little bigger and show more detail and also when we hover on the card all other cards should get resuffeled

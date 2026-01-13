@@ -36,7 +36,7 @@ const page = () => {
       {/* Logo Sections there are three files see which one is looking good*/}
       <LogoSection />
       <ClientsSection />
-      <OurNetworkSection />
+      {/* <OurNetworkSection /> */}
       {/* Flow Sections there are three files see which one is looking good*/}
       {/* <FlowSection2 /> */}
       <FlowSection1 />
@@ -44,12 +44,13 @@ const page = () => {
       {/* <BusinessFlowDiagram /> */}
       {/* <FlowDiagram /> */}
 
-      <MT7FlowSection />
-      <ProcessFlow />
+      {/* <MT7FlowSection />
+      <ProcessFlow /> */}
       
       <AboutUs />
       <Services />
-      <Services2 />
+      
+      {/* <Services2 /> */}
       <Pricing />
 
       
@@ -62,7 +63,7 @@ const page = () => {
 
       {/* Footers there are two files see which one is looking good*/}
       <Footer1 />
-      <Footer />
+      {/* <Footer /> */}
       <ScrollToTop />
     </>
   );
