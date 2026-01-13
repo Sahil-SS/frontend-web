@@ -54,7 +54,7 @@ const page = () => {
       <Pricing />
 
       
-      <ComparisonSection />
+      {/* <ComparisonSection /> */}
       <Comparison />
       <ComparisonTable />
       <CompSection />
