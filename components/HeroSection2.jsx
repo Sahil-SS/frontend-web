@@ -29,6 +29,7 @@ export default function HeroSection2() {
           className="object-cover opacity-40"
           priority
         />
+        
         {/* --- BIG FLAME SPHERE IN BACKGROUND --- */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
@@ -41,7 +42,45 @@ export default function HeroSection2() {
               opacity: 0.6
             }}
           />
+          
+          {/* OUTER BORDER RING - Most Subtle */}
+          <div
+            className="absolute w-[82vw] h-[82vw] lg:w-[72vw] lg:h-[72vw] xl:w-[62vw] xl:h-[62vw] rounded-full"
+            style={{
+              background: "transparent",
+              border: "2px solid rgba(255,140,0,0.15)",
+              filter: "blur(8px)",
+              transform: "translateY(10%)",
+              mixBlendMode: "screen"
+            }}
+          />
+          
+          {/* MIDDLE BORDER RING */}
+          <div
+            className="absolute w-[80.5vw] h-[80.5vw] lg:w-[70.5vw] lg:h-[70.5vw] xl:w-[60.5vw] xl:h-[60.5vw] rounded-full"
+            style={{
+              background: "transparent",
+              border: "1.5px solid rgba(255,165,0,0.25)",
+              filter: "blur(4px)",
+              transform: "translateY(10%)",
+              mixBlendMode: "screen"
+            }}
+          />
+          
+          {/* INNER BORDER RING - Most Visible */}
+          <div
+            className="absolute w-[79vw] h-[79vw] lg:w-[69vw] lg:h-[69vw] xl:w-[59vw] xl:h-[59vw] rounded-full"
+            style={{
+              background: "transparent",
+              border: "1px solid rgba(255,69,0,0.35)",
+              filter: "blur(2px)",
+              transform: "translateY(10%)",
+              mixBlendMode: "screen",
+              boxShadow: "inset 0 0 40px rgba(255,140,0,0.1)"
+            }}
+          />
         </div>
+        
         {/* --- LARGE BLENDED FLAME SPHERE --- */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
@@ -52,7 +91,31 @@ export default function HeroSection2() {
               transform: "translateY(-5%)"
             }}
           />
+          
+          {/* BORDER RINGS FOR SECOND SPHERE */}
+          <div
+            className="absolute w-[72vw] h-[72vw] rounded-full"
+            style={{
+              background: "transparent",
+              border: "1.5px solid rgba(255,174,66,0.2)",
+              filter: "blur(6px)",
+              transform: "translateY(-5%)",
+              mixBlendMode: "screen"
+            }}
+          />
+          
+          <div
+            className="absolute w-[70.5vw] h-[70.5vw] rounded-full"
+            style={{
+              background: "transparent",
+              border: "1px solid rgba(255,69,0,0.3)",
+              filter: "blur(3px)",
+              transform: "translateY(-5%)",
+              mixBlendMode: "screen"
+            }}
+          />
         </div>
+        
         {/* --- ADDITIONAL FLAME LAYER FOR BETTER BLENDING --- */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
@@ -65,7 +128,20 @@ export default function HeroSection2() {
               opacity: 0.4
             }}
           />
+          
+          {/* SUBTLE OUTER BORDER */}
+          <div
+            className="absolute w-[91vw] h-[91vw] rounded-full"
+            style={{
+              background: "transparent",
+              border: "1px solid rgba(255,140,0,0.1)",
+              filter: "blur(10px)",
+              transform: "translateY(5%)",
+              mixBlendMode: "screen"
+            }}
+          />
         </div>
+        
         <div className="absolute inset-0 bg-gradient-to-t from-[#050000] via-transparent to-[#050000]/80" />
         <div className="absolute inset-0 bg-black/20" />
         <div
