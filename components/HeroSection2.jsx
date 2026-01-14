@@ -137,6 +137,7 @@ export default function HeroSection2() {
                 />
               </span>
             </motion.h1>
+            
             <p className={`${montserrat.className} text-lg text-gray-200 font-light leading-relaxed mb-10 max-w-xl opacity-90`}>
               Empower your business to thrive with expert advice tailored to your goals,
               ensuring growth, innovation, and long-term success. Unlock your potential
@@ -184,12 +185,11 @@ export default function HeroSection2() {
           </motion.div>
 
           {/* RIGHT CONTENT */}
-          <motion.div className="relative">
-            {/* UPDATED: IMAGE CONTAINER SMALLER BY 10% (h-500px to h-450px) */}
+          <motion.div className="relative mt-12 lg:mt-0">
             <motion.div
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full h-[450px] rounded-3xl overflow-hidden bg-red-950/10 backdrop-blur-xl border border-white/10 shadow-2xl shadow-red-500/5"
+              className="relative w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden bg-red-950/10 backdrop-blur-xl border border-white/10 shadow-2xl shadow-red-500/5"
             >
               <Image
                 src="/work.png"
@@ -200,12 +200,15 @@ export default function HeroSection2() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#050000] via-transparent to-transparent" />
             </motion.div>
 
-            {/* UPDATED: 4.6K CARD SMALLER BY 10% (w/h-40 to w/h-36) */}
-            <div className="absolute -bottom-5 -left-5 w-36 h-36 flex items-center justify-center">
-              <div className="absolute inset-0 rounded-2xl border-4 border-[#ff4500]/20 blur-[3px] animate-pulse" />
-              <div className="relative w-full h-full rounded-2xl bg-black/90 backdrop-blur-xl border-4 border-[#ff4500]/50 p-6 shadow-[0_0_40px_rgba(255,69,0,0.25)] flex flex-col justify-center">
-                <div className="text-gray-300 text-[11px] mb-1 font-medium tracking-wide">Connected</div>
-                <div className="text-2xl font-bold text-[#ff4500] drop-shadow-[0_0_12px_rgba(255,69,0,0.6)]">4.6K+</div>
+            {/* RESPONSIVE 4.6K CONNECTED CARD */}
+            <div className="absolute -bottom-4 -left-4 md:-bottom-5 md:-left-5 w-28 h-28 md:w-36 md:h-36 flex items-center justify-center">
+              {/* Outer Pulse Ring */}
+              <div className="absolute inset-0 rounded-2xl border-2 md:border-4 border-[#ff4500]/20 blur-[2px] animate-pulse" />
+              
+              {/* Card Body */}
+              <div className="relative w-full h-full rounded-2xl bg-black/90 backdrop-blur-xl border-2 md:border-4 border-[#ff4500]/50 p-4 md:p-6 shadow-[0_0_40px_rgba(255,69,0,0.25)] flex flex-col justify-center text-center lg:text-left">
+                <div className="text-gray-300 text-[10px] md:text-[11px] mb-1 font-medium tracking-wide">Connected</div>
+                <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#ff4500] drop-shadow-[0_0_12px_rgba(255,69,0,0.6)] whitespace-nowrap">4.6K+</div>
               </div>
             </div>
           </motion.div>
