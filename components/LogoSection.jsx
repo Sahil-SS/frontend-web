@@ -6,11 +6,10 @@ import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-// Replace these with your actual logo paths
 const LOGOS = [
   { name: "Discord", src: "/logos/discord.svg" },
   { name: "Webflow", src: "/logos/webflow.svg" },
@@ -23,11 +22,6 @@ const LOGOS = [
 const LogoSection = () => {
   return (
     <section className="relative py-24 bg-transparent overflow-hidden flex justify-center w-full">
-      {/* ================= BACKGROUND EFFECTS ================= */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-orange-600/10 blur-[150px] rounded-full" /> */}
-      </div>
-
       <div className="relative z-10 w-full min-w-[80vw] max-w-[1400px] px-6 md:px-14">
         
         {/* GLASS CONTAINER */}
@@ -40,27 +34,34 @@ const LogoSection = () => {
         >
           {/* CONTENT LAYOUT */}
           <div className="flex flex-col items-center text-center mb-16">
-            <div className="inline-block mb-4">
+            <div className="inline-block mb-6">
               <p className={`${montserrat.className} uppercase tracking-[0.4em] text-[10px] font-bold text-orange-500`}>
                 Trusted Partners
               </p>
+              {/* MATCHED UNDERLINE STYLE */}
               <motion.div 
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="h-[1px] bg-orange-500/50 mt-1"
+                className="h-[1.5px] bg-[#ff4500] rounded-full shadow-[0_0_10px_#ff4500] mt-1"
               />
             </div>
 
-            <h2 className={`${montserrat.className} text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight`}>
+            {/* EXACT MATCH TO HERO HEADING SIZE & GRADIENT */}
+            <h2 className={`
+              ${montserrat.className} 
+              text-2xl md:text-3xl lg:text-4xl font-bold leading-tight
+              bg-gradient-to-r from-white via-[#ffae42] to-[#ff4500] 
+              bg-clip-text text-transparent 
+              drop-shadow-[0_4px_12px_rgba(255,69,0,0.2)]
+            `}>
               Powering the next generation <br className="hidden md:block" /> 
-              of <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffae42] to-[#ff4500]">digital ecosystems.</span>
+              of digital ecosystems.
             </h2>
           </div>
 
           {/* INFINITE LOGO TICKER */}
           <div className="relative mt-10">
-            {/* Fade Overlays for the ticker edges */}
             <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-zinc-900 to-transparent z-10" />
             <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-zinc-900 to-transparent z-10" />
 
@@ -74,11 +75,9 @@ const LogoSection = () => {
                 }}
                 className="flex gap-16 md:gap-24 items-center whitespace-nowrap"
               >
-                {/* Duplicate the array to create seamless loop */}
                 {[...LOGOS, ...LOGOS].map((logo, i) => (
                   <div key={i} className="flex items-center gap-3 group transition-all duration-300">
                     <div className="w-10 h-10 bg-white/5 rounded-lg border border-white/10 flex items-center justify-center group-hover:bg-orange-500/20 group-hover:border-orange-500/50">
-                      {/* Using a placeholder circle to represent the logo icon */}
                       <div className="w-5 h-5 rounded-sm border-2 border-white/20 group-hover:border-orange-400 group-hover:rotate-45 transition-all duration-500" />
                     </div>
                     <span className={`${montserrat.className} text-xl md:text-2xl font-bold text-white/30 group-hover:text-white transition-colors`}>
