@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import GlobalBackground from "@/components/GlobalBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,9 +21,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative bg-black text-white`}
       >
-        {children}
+        {/* 🔥 GLOBAL ANIMATED BACKGROUND */}
+        <GlobalBackground />
+
+        {/* 🧱 APP CONTENT */}
+        <main className="relative z-10">
+          {children}
+        </main>
       </body>
     </html>
   );

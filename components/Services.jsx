@@ -56,10 +56,10 @@ const Services = () => {
     <section
       id="services"
       onMouseMove={handleMouseMove}
-      className="relative pt-10 pb-10 bg-black overflow-hidden flex justify-center w-full"
+      className="relative pt-10 pb-10 bg-transparent overflow-hidden flex justify-center w-full"
     >
       {/* ================= OPTIMIZED INTERACTIVE BG ================= */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black to-transparent z-20" />
         <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-black to-transparent z-20" />
         
@@ -67,8 +67,6 @@ const Services = () => {
           style={{ left: dx, top: dy, translateX: "-50%", translateY: "-50%" }}
           className="absolute w-[500px] h-[500px] bg-red-600/10 blur-[120px] rounded-full z-10 will-change-transform" 
         />
-
-        {/* Rising Embers */}
         {[...Array(8)].map((_, i) => (
           <motion.div 
             key={i} 
@@ -78,7 +76,7 @@ const Services = () => {
             style={{ left: `${(i * 25) % 100}%`, bottom: "5%" }} 
           />
         ))}
-      </div>
+      </div> */}
 
       <div className="relative z-30 w-full min-w-[80vw] max-w-[1400px] px-14">
         

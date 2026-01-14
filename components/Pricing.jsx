@@ -45,18 +45,18 @@ const Pricing = () => {
   return (
     <section
       id="pricing"
-      className="relative pt-32 pb-10 bg-black overflow-hidden flex justify-center"
+      className="relative pt-32 pb-10 bg-transparent overflow-hidden flex justify-center"
     >
       {/* ================= BLEND TOP & BOTTOM ================= */}
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-20" />
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-20" />
+      {/* <div className="pointer-events-none absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-20" />
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-20" /> */}
 
       {/* ================= BACKGROUND GLOW ================= */}
-      <motion.div
+      {/* <motion.div
         className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-600/20 blur-[200px] rounded-full"
         animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
         transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-      />
+      /> */}
 
       <div className="relative z-10 w-full min-w-[80vw] max-w-[1400px] px-14">
         

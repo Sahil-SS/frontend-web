@@ -22,10 +22,10 @@ const LOGOS = [
 
 const LogoSection = () => {
   return (
-    <section className="relative py-24 bg-black overflow-hidden flex justify-center w-full">
+    <section className="relative py-24 bg-transparent overflow-hidden flex justify-center w-full">
       {/* ================= BACKGROUND EFFECTS ================= */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-orange-600/10 blur-[150px] rounded-full" />
+        {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-orange-600/10 blur-[150px] rounded-full" /> */}
       </div>
 
       <div className="relative z-10 w-full min-w-[80vw] max-w-[1400px] px-6 md:px-14">

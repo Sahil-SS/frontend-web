@@ -67,13 +67,13 @@ const ClientsSection = () => {
       id="clients"
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative py-24 md:py-32 bg-black overflow-hidden"
+      className="relative py-24 md:py-32 bg-transparent overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Gradient overlays */}
-        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black to-transparent z-20" />
-        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-black to-transparent z-20" />
+        {/* <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black to-transparent z-20" /> */}
+        {/* <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-black to-transparent z-20" /> */}
         
         {/* Animated gradient glow */}
         <motion.div
@@ -90,14 +90,14 @@ const ClientsSection = () => {
         />
         
         {/* Grid pattern overlay */}
-        <div 
+        {/* <div 
           className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px),
                              linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
             backgroundSize: '80px 80px',
           }}
-        />
+        /> */}
       </div>
 
       <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -138,8 +138,8 @@ const ClientsSection = () => {
             transition={{ delay: 0.4 }}
             className={`${montserrat.className} text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed`}
           >
-            We've partnered with renowned names across industries. From startups to Fortune 500 companies, 
-            we've delivered exceptional results for clients of all sizes.
+            We&apos;ve partnered with renowned names across industries. From startups to Fortune 500 companies, 
+            we&apos;ve delivered exceptional results for clients of all sizes.
           </motion.p>
         </div>
 
