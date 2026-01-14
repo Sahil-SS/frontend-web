@@ -1,6 +1,11 @@
 "use client";
 
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Montserrat } from "next/font/google";
 import { Menu, X, ArrowRight } from "lucide-react";
@@ -10,6 +15,8 @@ const montserrat = Montserrat({
   weight: ["500", "600", "700"],
   display: "swap",
 });
+
+/* ================= CONFIG ================= */
 
 const SECTIONS = [
   { id: "about", label: "About" },
@@ -74,7 +81,8 @@ export default function Navbar() {
           if (!entry.isIntersecting) continue;
 
           const offset = Math.abs(
-            entry.boundingClientRect.top - window.innerHeight / 2
+            entry.boundingClientRect.top -
+              window.innerHeight / 2
           );
 
           if (!closest || offset < closest.offset) {
@@ -86,7 +94,9 @@ export default function Navbar() {
         }
 
         if (closest) {
-          setActiveSection((prev) => (prev === closest.id ? prev : closest.id));
+          setActiveSection((prev) =>
+            prev === closest.id ? prev : closest.id
+          );
         }
       },
       { threshold: 0.3 }
@@ -100,7 +110,8 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  const activeLabel = SECTIONS.find((s) => s.id === activeSection)?.label ?? "";
+  const activeLabel =
+    SECTIONS.find((s) => s.id === activeSection)?.label ?? "";
 
   /* ================= RENDER ================= */
 
@@ -114,9 +125,7 @@ export default function Navbar() {
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
           className="pointer-events-auto flex items-center justify-between px-10 py-3 rounded-full min-w-[80vw] max-w-[1200px] bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl"
         >
-          <span
-            className={`${montserrat.className} font-bold text-white text-xl`}
-          >
+          <span className={`${montserrat.className} font-bold text-white text-xl`}>
             MT7<span className="text-red-500">.in</span>
           </span>
 
@@ -128,13 +137,17 @@ export default function Navbar() {
                 <a
                   key={id}
                   href={`#${id}`}
-                  className={`relative py-1 transition-colors ${active ? "text-white" : "text-gray-400 hover:text-white"
-                    }`}
+                  className={`relative py-1 transition-colors ${
+                    active
+                      ? "text-white"
+                      : "text-gray-400 hover:text-white"
+                  }`}
                 >
                   {label}
                   <span
-                    className={`absolute left-0 -bottom-1 h-[2px] bg-red-500 transition-all ${active ? "w-full" : "w-0"
-                      }`}
+                    className={`absolute left-0 -bottom-1 h-[2px] bg-red-500 transition-all ${
+                      active ? "w-full" : "w-0"
+                    }`}
                   />
                 </a>
               );
@@ -153,9 +166,7 @@ export default function Navbar() {
       {/* ================= MOBILE TOP BAR ================= */}
       <div className="fixed top-4 left-4 right-4 z-50 md:hidden h-14">
         <div className="relative flex items-center justify-between px-5 h-full rounded-2xl bg-black/60 backdrop-blur-lg border border-white/10">
-          <span
-            className={`${montserrat.className} font-bold text-white text-lg`}
-          >
+          <span className={`${montserrat.className} font-bold text-white text-lg`}>
             MT7<span className="text-red-500">.in</span>
           </span>
 
@@ -204,15 +215,10 @@ export default function Navbar() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-red-500/10 blur-[100px] rounded-full pointer-events-none" />
 
               <div className="flex justify-between items-center mb-10">
-                <span
-                  className={`${montserrat.className} text-xl font-bold text-white`}
-                >
+                <span className={`${montserrat.className} text-xl font-bold text-white`}>
                   MT7<span className="text-red-500">.in</span>
                 </span>
-                <button
-                  onClick={closeMenu}
-                  className="p-2 text-gray-400 hover:text-white"
-                >
+                <button onClick={closeMenu} className="p-2 text-gray-400 hover:text-white">
                   <X size={24} />
                 </button>
               </div>
@@ -231,10 +237,11 @@ export default function Navbar() {
                       className="group flex items-center justify-between py-4 border-b border-white/5"
                     >
                       <span
-                        className={`${montserrat.className} text-base ${activeSection === id
+                        className={`${montserrat.className} text-base ${
+                          activeSection === id
                             ? "text-white"
                             : "text-gray-300 group-hover:text-white"
-                          } transition-colors`}
+                        } transition-colors`}
                       >
                         {label}
                       </span>

@@ -32,7 +32,7 @@ const FlowSection = () => {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-32 -left-32 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-orange-600/5 blur-[100px] rounded-full" />
         <div className="absolute -bottom-32 -right-32 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-red-800/5 blur-[100px] rounded-full" />
-      </div> */}
+      </div>
 
       <div className="relative z-30 w-full max-w-[1300px] px-6 md:px-12">
         {/* Section Header */}

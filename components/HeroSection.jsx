@@ -1,3 +1,4 @@
+
 "use client";
 
 import { motion } from "framer-motion";
@@ -10,7 +11,7 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-export default function HeroSection() {
+export default function HeroSection2() {
   const memberImages = [
     "/person1.png",
     "/person2.png",
@@ -19,7 +20,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-transparent overflow-hidden flex items-center pt-24 pb-20 md:pb-0">
+    <section className="relative min-h-screen bg-[transparent] overflow-hidden flex items-center pt-24 pb-20 md:pb-0">
       {/* ================= BACKGROUND ENVIRONMENT ================= */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -30,7 +31,7 @@ export default function HeroSection() {
           priority
         />
         
-        {/* --- BIG FLAME SPHERE IN BACKGROUND --- */}
+        {/* --- BIG FLAME SPHERE IN BACKGROUND ---
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
             className="w-[80vw] h-[80vw] lg:w-[70vw] lg:h-[70vw] xl:w-[60vw] xl:h-[60vw] rounded-full"
@@ -76,10 +77,10 @@ export default function HeroSection() {
               boxShadow: "inset 0 0 60px rgba(255,140,0,0.3)"
             }}
           />
-        </div>
+        </div> */}
         
         {/* --- LARGE BLENDED FLAME SPHERE --- */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
             className="w-[70vw] h-[70vw] rounded-full opacity-30"
             style={{
@@ -108,7 +109,7 @@ export default function HeroSection() {
             backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
             backgroundSize: '40px 40px',
           }}
-        />
+        /> */}
       </div>
 
       {/* ================= CONTENT ================= */}
