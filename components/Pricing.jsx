@@ -2,10 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-// 1. Import Montserrat
 import { Montserrat } from "next/font/google";
 
-// 2. Configure Montserrat
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -45,39 +43,29 @@ const Pricing = () => {
   return (
     <section
       id="pricing"
-      className="relative pt-32 pb-10 bg-transparent overflow-hidden flex justify-center"
+      className="relative pt-20 pb-10 bg-transparent overflow-hidden flex justify-center"
     >
-      {/* ================= BLEND TOP & BOTTOM ================= */}
-      {/* <div className="pointer-events-none absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-20" />
-      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-20" /> */}
-
-      {/* ================= BACKGROUND GLOW ================= */}
-      {/* <motion.div
-        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-red-600/20 blur-[200px] rounded-full"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.6, 0.4] }}
-        transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-      /> */}
-
       <div className="relative z-10 w-full min-w-[80vw] max-w-[1400px] px-14">
         
-        {/* SECTION HEADER (KEPT UPDATED DESIGN) */}
-        <div className="max-w-4xl mb-20">
+        {/* SECTION HEADER - EXACT MATCH TO SERVICES SIZE AND POSITION */}
+        <div className="flex flex-col items-start md:-mt-5 max-w-3xl mb-16">
           <div className="inline-block">
-            <p className={`${montserrat.className} uppercase tracking-[0.3em] text-xs font-bold text-orange-400 mb-4`}>
+            <p className={`${montserrat.className} uppercase tracking-[0.3em] text-xs font-bold text-orange-500 mb-2`}>
               Pricing
             </p>
             <motion.div 
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}
               viewport={{ once: true }}
-              transition={{ duration: 1, ease: "circOut", delay: 0.3 }}
+              transition={{ duration: 1, ease: "circOut", delay: 0.5 }}
               className="h-[2px] bg-gradient-to-r from-orange-500 to-transparent"
             />
           </div>
 
+          {/* FONT SIZE EXACTLY MATCHED TO SERVICES (text-2xl md:text-3xl lg:text-4xl) */}
           <h2 className={`
             ${montserrat.className} 
-            text-[2.025rem] md:text-[3.375rem] font-extrabold mt-8 mb-4
+            text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-8 leading-[1.15]
             bg-gradient-to-r from-white via-[#ffae42] to-[#ff4500]
             bg-clip-text text-transparent
             drop-shadow-[0_4px_12px_rgba(255,69,0,0.2)]
@@ -86,7 +74,7 @@ const Pricing = () => {
           </h2>
         </div>
 
-        {/* PRICING CARDS GRID (RESTORED TO OLD DESIGN) */}
+        {/* PRICING CARDS GRID */}
         <div className="grid md:grid-cols-3 gap-8 items-end max-w-6xl mx-auto">
           {plans.map((plan, i) => (
             <motion.div
@@ -108,12 +96,10 @@ const Pricing = () => {
                 }
               `}
             >
-              {/* STATIC GLOW FOR HIGHLIGHTED PLAN (RESTORED) */}
               {plan.highlight && (
                 <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-orange-500/20 via-red-500/10 to-transparent blur-xl -z-10" />
               )}
 
-              {/* PLAN HEADER (RESTORED) */}
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h3 className={`${montserrat.className} text-lg font-bold text-white`}>
@@ -128,7 +114,6 @@ const Pricing = () => {
                 </div>
               </div>
 
-              {/* BUTTON (RESTORED) */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -145,7 +130,6 @@ const Pricing = () => {
                 Purchase
               </motion.button>
 
-              {/* FEATURES (RESTORED) */}
               <div>
                 <p className={`${montserrat.className} text-sm text-white font-semibold mb-4`}>
                   What’s included?
