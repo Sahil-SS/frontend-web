@@ -19,29 +19,31 @@ const FlowSection = () => {
     visible: {
       pathLength: 1,
       opacity: 1,
-      transition: { 
-        pathLength: { duration: 1.5, ease: "easeInOut" }, 
-        opacity: { duration: 0.2 } 
-      }
-    }
+      transition: {
+        pathLength: { duration: 1.5, ease: "easeInOut" },
+        opacity: { duration: 0.2 },
+      },
+    },
   };
 
   return (
     <section className="relative py-10 md:py-20 bg-transparent overflow-hidden flex justify-center w-full">
       {/* Optimized Background Atmosphere */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-32 -left-32 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-orange-600/5 blur-[100px] rounded-full" />
         <div className="absolute -bottom-32 -right-32 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-red-800/5 blur-[100px] rounded-full" />
-      </div>
+      </div> */}
 
       <div className="relative z-30 w-full max-w-[1300px] px-6 md:px-12">
         {/* Section Header */}
         <div className="mb-10 max-w-2xl flex flex-col items-start">
           <div className="inline-block">
-            <p className={`${montserrat.className} uppercase tracking-[0.3em] text-xs font-bold text-orange-500 mb-2`}>
+            <p
+              className={`${montserrat.className} uppercase tracking-[0.3em] text-xs font-bold text-orange-500 mb-2`}
+            >
               How it works
             </p>
-            <motion.div 
+            <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}
               viewport={{ once: true }}
@@ -49,14 +51,15 @@ const FlowSection = () => {
               className="h-[2px] bg-gradient-to-r from-orange-500 to-transparent"
             />
           </div>
-          <h2 className={`${montserrat.className} text-2xl md:text-3xl lg:text-4xl font-bold mt-6 leading-[1.15] bg-gradient-to-r from-white via-[#ffae42] to-[#ff4500] bg-clip-text text-transparent drop-shadow-[0_4px_12px_rgba(255,69,0,0.2)]`}>
+          <h2
+            className={`${montserrat.className} text-2xl md:text-3xl lg:text-4xl font-bold mt-6 leading-[1.15] bg-gradient-to-r from-white via-[#ffae42] to-[#ff4500] bg-clip-text text-transparent drop-shadow-[0_4px_12px_rgba(255,69,0,0.2)]`}
+          >
             Placeholder headline for system flow
           </h2>
         </div>
 
         {/* ================= FLOW GRID ================= */}
         <div className="flex flex-col lg:grid lg:grid-cols-[0.8fr_2.5fr_0.8fr] gap-10 lg:gap-4 items-center">
-
           {/* 1. LEFT STACK */}
           <div className="flex flex-row lg:flex-col gap-3 w-full lg:w-auto justify-center overflow-hidden">
             {STACK.map((_, i) => (
@@ -76,68 +79,124 @@ const FlowSection = () => {
           {/* 2. MIDDLE AREA (Concave Flow Hub) */}
           {/* We use aspect-ratio to keep the SVG and Boxes locked together */}
           <div className="relative w-full max-w-[600px] aspect-[16/11] md:aspect-[16/9] flex items-center justify-center">
-            
-            <svg 
-              className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" 
-              viewBox="0 0 600 400" 
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none overflow-visible"
+              viewBox="0 0 600 400"
               preserveAspectRatio="xMidYMid meet"
             >
               <defs>
-                <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                <marker
+                  id="arrow"
+                  viewBox="0 0 10 10"
+                  refX="5"
+                  refY="5"
+                  markerWidth="4"
+                  markerHeight="4"
+                  orient="auto-start-reverse"
+                >
                   <path d="M 0 0 L 10 5 L 0 10 z" fill="#f97316" />
                 </marker>
               </defs>
 
               {/* Path from Left Stack area to MT7 */}
-              <motion.path d="M 10,200 L 100,200" stroke="#f97316" strokeWidth="1.5" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={draw} />
+              <motion.path
+                d="M 10,200 L 100,200"
+                stroke="#f97316"
+                strokeWidth="1.5"
+                fill="none"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={draw}
+              />
 
               {/* Service Loop (Top) - Relative to MT7(150,200) and Clients(450,200) */}
-              <motion.path 
-                d="M 200,170 C 200,50 400,50 450,170" 
-                stroke="#f97316" strokeWidth="1.5" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={draw} markerEnd="url(#arrow)" 
+              <motion.path
+                d="M 200,170 C 200,50 400,50 450,170"
+                stroke="#f97316"
+                strokeWidth="1.5"
+                fill="none"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={draw}
+                markerEnd="url(#arrow)"
               />
-              
+
               {/* Request Loop (Bottom) */}
-              <motion.path 
-                d="M 450,230 C 400,350 200,350 200,230" 
-                stroke="#f97316" strokeWidth="1.5" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={draw} markerEnd="url(#arrow)" 
+              <motion.path
+                d="M 450,230 C 400,350 200,350 200,230"
+                stroke="#f97316"
+                strokeWidth="1.5"
+                fill="none"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={draw}
+                markerEnd="url(#arrow)"
               />
 
               {/* Center line */}
-              <motion.path d="M 230,200 L 380,200" stroke="#f97316" strokeWidth="1.5" fill="none" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={draw} markerEnd="url(#arrow)" />
+              <motion.path
+                d="M 230,200 L 380,200"
+                stroke="#f97316"
+                strokeWidth="1.5"
+                fill="none"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={draw}
+                markerEnd="url(#arrow)"
+              />
 
               {/* Moving dots */}
               <circle r="2.5" fill="#fb923c">
-                <animateMotion dur="3s" repeatCount="indefinite" path="M 200,170 C 200,50 400,50 450,170" />
+                <animateMotion
+                  dur="3s"
+                  repeatCount="indefinite"
+                  path="M 200,170 C 200,50 400,50 450,170"
+                />
               </circle>
               <circle r="2.5" fill="#fb923c">
-                <animateMotion dur="3s" repeatCount="indefinite" path="M 450,230 C 400,350 200,350 200,230" />
+                <animateMotion
+                  dur="3s"
+                  repeatCount="indefinite"
+                  path="M 450,230 C 400,350 200,350 200,230"
+                />
               </circle>
             </svg>
 
             {/* MT7 Box - Positioned via % to stay locked to SVG coords */}
-            <motion.div 
-               initial={{ scale: 0.8, opacity: 0 }}
-               whileInView={{ scale: 1, opacity: 1 }}
-               viewport={{ once: true }}
-               className="absolute left-[18%] md:left-[22%] w-20 h-20 md:w-28 md:h-28 border-2 border-orange-500 rounded-2xl bg-black flex items-center justify-center z-10 shadow-[0_0_30px_rgba(249,115,22,0.3)]"
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              className="absolute left-[18%] md:left-[22%] w-20 h-20 md:w-28 md:h-28 border-2 border-orange-500 rounded-2xl bg-black flex items-center justify-center z-10 shadow-[0_0_30px_rgba(249,115,22,0.3)]"
             >
-              <span className="text-white font-bold text-sm md:text-xl">MT7</span>
+              <span className="text-white font-bold text-sm md:text-xl">
+                MT7
+              </span>
             </motion.div>
 
             {/* Clients Box - Positioned via % to stay locked to SVG coords */}
-            <motion.div 
-               initial={{ opacity: 0, x: 20 }}
-               whileInView={{ opacity: 1, x: 0 }}
-               viewport={{ once: true }}
-               className="absolute right-[5%] md:right-[10%] w-32 h-16 md:w-44 md:h-20 border border-white/20 rounded-xl bg-zinc-900/40 backdrop-blur-md flex items-center justify-center z-10"
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="absolute right-[5%] md:right-[10%] w-32 h-16 md:w-44 md:h-20 border border-white/20 rounded-xl bg-zinc-900/40 backdrop-blur-md flex items-center justify-center z-10"
             >
-              <span className="text-white font-bold text-xs md:text-lg uppercase tracking-widest">Clients</span>
+              <span className="text-white font-bold text-xs md:text-lg uppercase tracking-widest">
+                Clients
+              </span>
             </motion.div>
 
             {/* Service/Request Labels */}
-            <div className="absolute top-[18%] md:top-[15%] left-[55%] -translate-x-1/2 text-orange-500 text-[8px] md:text-[10px] font-bold uppercase tracking-widest">Service</div>
-            <div className="absolute bottom-[18%] md:bottom-[15%] left-[55%] -translate-x-1/2 text-orange-500 text-[8px] md:text-[10px] font-bold uppercase tracking-widest">Request</div>
+            <div className="absolute top-[18%] md:top-[15%] left-[55%] -translate-x-1/2 text-orange-500 text-[8px] md:text-[10px] font-bold uppercase tracking-widest">
+              Service
+            </div>
+            <div className="absolute bottom-[18%] md:bottom-[15%] left-[55%] -translate-x-1/2 text-orange-500 text-[8px] md:text-[10px] font-bold uppercase tracking-widest">
+              Request
+            </div>
           </div>
 
           {/* 3. FAR RIGHT: OUTCOMES */}
@@ -155,7 +214,6 @@ const FlowSection = () => {
               </motion.div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

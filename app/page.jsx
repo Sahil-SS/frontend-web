@@ -13,7 +13,6 @@ import Footer from "@/components/Footer";
 import Footer1 from "@/components/Footer1";
 import Hero from "@/components/hero/Hero";
 import HeroSection from "@/components/HeroSection";
-import HeroSection2 from "@/components/HeroSection2";
 import LogoSection from "@/components/LogoSection";
 import MT7FlowSection from "@/components/MT7FlowSection";
 import Navbar from "@/components/Navbar";
@@ -22,49 +21,49 @@ import Pricing from "@/components/Pricing";
 import ProcessFlow from "@/components/ProcessFlow";
 import ScrollToTop from "@/components/ScrollToTop";
 import Services from "@/components/Services";
-import Services2 from "@/components/Services2";
-import Testimonials from "@/components/Testimonials";
 import React from "react";
 
 const page = () => {
   return (
     <>
-      <Navbar />
-      {/* <Hero />   */}
-      {/* <HeroSection /> */}
-      <HeroSection2 />
-      {/* Logo Sections there are three files see which one is looking good*/}
+
+    {/* Final Sections*/}
+      <Navbar /> {/* Done */}
+      <HeroSection />
       <LogoSection />
       <ClientsSection />
+      <FlowSection />
+      <AboutUs />
+      <Services />
+      <Pricing />
+      <Footer1 />
+      <ScrollToTop />
+
+    {/* Final Sections End her*/}
+
+
+    
+      {/* <Hero />   */}
+      {/* Logo Sections there are three files see which one is looking good*/}
       {/* <OurNetworkSection /> */}
       {/* Flow Sections there are three files see which one is looking good*/}
       {/* <FlowSection2 /> */}
       {/* <FlowSection1 /> */}
-      <FlowSection />
       {/* <BusinessFlowDiagram /> */}
       {/* <FlowDiagram /> */}
 
-      {/* <MT7FlowSection />
+      {/* <MT7FlowSection />}
       <ProcessFlow /> */}
-      
-      <AboutUs />
-      <Services />
-      
-      {/* <Services2 /> */}
-      <Pricing />
 
-      
+
+
       {/* <ComparisonSection /> */}
       {/* <Comparison /> */}
       {/* <ComparisonTable /> */}
       {/* <CompSection /> */}
 
-      <Testimonials />
-
       {/* Footers there are two files see which one is looking good*/}
-      <Footer1 />
       {/* <Footer /> */}
-      <ScrollToTop />
     </>
   );
 };

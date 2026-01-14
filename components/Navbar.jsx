@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Montserrat } from "next/font/google";
 import { Menu, X, ArrowRight } from "lucide-react";
@@ -13,85 +11,172 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-const NAV_LINKS = [
-  { label: "About", href: "/#about" },
-  { label: "Services", href: "/#services" },
-  { label: "Pricing", href: "/#pricing" },
-  { label: "Comparison", href: "/#comparison" },
-  { label: "Testimonials", href: "/#testimonials" },
+const SECTIONS = [
+  { id: "about", label: "About" },
+  { id: "services", label: "Services" },
+  { id: "pricing", label: "Pricing" },
+  { id: "comparison", label: "Comparison" },
+  { id: "testimonials", label: "Testimonials" },
 ];
 
-export default function Navbar() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+const TOP_OFFSET = 80;
 
-  // Optimized toggle to prevent re-renders
-  const toggleMenu = useCallback(() => setOpen((prev) => !prev), []);
+/* ================= COMPONENT ================= */
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
+
+  const isAtTopRef = useRef(true);
+  const rafRef = useRef(false);
+
+  const toggleMenu = useCallback(() => setOpen((p) => !p), []);
   const closeMenu = useCallback(() => setOpen(false), []);
+
+  /* ================= SCROLL (OPTIMIZED) ================= */
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (rafRef.current) return;
+
+      rafRef.current = true;
+      requestAnimationFrame(() => {
+        const atTop = window.scrollY < TOP_OFFSET;
+
+        if (isAtTopRef.current !== atTop) {
+          isAtTopRef.current = atTop;
+
+          if (atTop) {
+            setActiveSection(null);
+          }
+        }
+
+        rafRef.current = false;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* ================= INTERSECTION OBSERVER ================= */
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isAtTopRef.current) return;
+
+        let closest = null;
+
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+
+          const offset = Math.abs(
+            entry.boundingClientRect.top - window.innerHeight / 2
+          );
+
+          if (!closest || offset < closest.offset) {
+            closest = {
+              id: entry.target.id,
+              offset,
+            };
+          }
+        }
+
+        if (closest) {
+          setActiveSection((prev) => (prev === closest.id ? prev : closest.id));
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    SECTIONS.forEach(({ id }) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const activeLabel = SECTIONS.find((s) => s.id === activeSection)?.label ?? "";
+
+  /* ================= RENDER ================= */
 
   return (
     <>
-      {/* ================= DESKTOP NAVBAR ================= */}
+      {/* ================= DESKTOP NAV ================= */}
       <div className="fixed top-6 left-0 right-0 z-50 hidden md:flex justify-center px-4 pointer-events-none">
         <motion.div
           initial={{ y: -10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
-          style={{ transform: "translateZ(0)" }} // GPU Acceleration
-          className="
-            pointer-events-auto
-            relative flex items-center justify-between
-            px-10 py-3 rounded-full
-            min-w-[80vw] max-w-[1200px]
-            bg-black/40 backdrop-blur-md
-            border border-white/10
-            shadow-[0_20px_50px_rgba(0,0,0,0.5)]
-            will-change-transform
-          "
+          className="pointer-events-auto flex items-center justify-between px-10 py-3 rounded-full min-w-[80vw] max-w-[1200px] bg-black/40 backdrop-blur-md border border-white/10 shadow-2xl"
         >
-          {/* Tubelight effect */}
-          <div className="absolute inset-x-10 top-0 h-[1px] bg-gradient-to-r from-transparent via-red-500/50 to-transparent" />
-          
-          <Link
-            href="/"
-            className={`${montserrat.className} flex items-baseline gap-1 font-bold tracking-wider text-white hover:opacity-80 transition-opacity`}
+          <span
+            className={`${montserrat.className} font-bold text-white text-xl`}
           >
-            <span className="text-xl">MT7</span>
-            <span className="text-sm text-red-500">.in</span>
-          </Link>
+            MT7<span className="text-red-500">.in</span>
+          </span>
 
-          <div className={`${montserrat.className} flex gap-10 text-sm font-medium`}>
-            {NAV_LINKS.map(({ label, href }) => {
-              const active = pathname === href || pathname.startsWith(href.replace("#", ""));
+          <div className={`${montserrat.className} flex gap-10 text-sm`}>
+            {SECTIONS.map(({ id, label }) => {
+              const active = activeSection === id;
+
               return (
-                <Link
-                  key={label}
-                  href={href}
-                  className={`relative py-1 group transition-colors duration-150 ${active ? "text-white" : "text-gray-400 hover:text-white"}`}
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  className={`relative py-1 transition-colors ${active ? "text-white" : "text-gray-400 hover:text-white"
+                    }`}
                 >
                   {label}
-                  <span className={`absolute left-0 -bottom-1 h-[2px] bg-red-500 transition-all duration-200 ease-out ${active ? "w-full shadow-[0_0_8px_#ef4444]" : "w-0 group-hover:w-full"}`} />
-                </Link>
+                  <span
+                    className={`absolute left-0 -bottom-1 h-[2px] bg-red-500 transition-all ${active ? "w-full" : "w-0"
+                      }`}
+                  />
+                </a>
               );
             })}
           </div>
 
-          <Link
-            href="/register"
-            className={`${montserrat.className} px-6 py-2 rounded-full text-sm font-semibold text-white bg-red-600 hover:bg-red-500 transition-all active:scale-95 shadow-[0_0_20px_rgba(239,68,68,0.3)]`}
+          <a
+            href="#contact"
+            className="px-6 py-2 rounded-full bg-red-600 text-white text-sm font-semibold"
           >
             Contact
-          </Link>
+          </a>
         </motion.div>
       </div>
 
       {/* ================= MOBILE TOP BAR ================= */}
       <div className="fixed top-4 left-4 right-4 z-50 md:hidden h-14">
-        <div className="flex items-center justify-between px-5 h-full rounded-2xl bg-black/60 backdrop-blur-lg border border-white/10 shadow-2xl overflow-hidden">
-          <Link href="/" className={`${montserrat.className} font-bold text-white text-lg`}>
+        <div className="relative flex items-center justify-between px-5 h-full rounded-2xl bg-black/60 backdrop-blur-lg border border-white/10">
+          <span
+            className={`${montserrat.className} font-bold text-white text-lg`}
+          >
             MT7<span className="text-red-500">.in</span>
-          </Link>
-          <button onClick={toggleMenu} className="p-2 -mr-2 text-white active:scale-90 transition-transform">
+          </span>
+
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <AnimatePresence mode="wait">
+              {activeSection && (
+                <motion.span
+                  key={activeSection}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.2 }}
+                  className={`${montserrat.className} text-sm font-semibold text-white`}
+                >
+                  {activeLabel}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <button onClick={toggleMenu} className="text-white">
             <Menu size={24} />
           </button>
         </div>
@@ -101,62 +186,75 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
               onClick={closeMenu}
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
             />
-            
+
             <motion.aside
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 350 }} // Snappy spring
-              style={{ transform: "translateZ(0)" }}
-              className="fixed inset-y-0 right-0 z-[70] w-full max-w-[280px] bg-zinc-950 border-l border-white/10 p-8 flex flex-col will-change-transform shadow-2xl"
+              transition={{ type: "spring", damping: 30, stiffness: 350 }}
+              className="fixed inset-y-0 right-0 z-[70] w-full max-w-[280px] bg-zinc-950 border-l border-white/10 p-8 flex flex-col shadow-2xl"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-red-500/10 blur-[100px] rounded-full pointer-events-none" />
 
               <div className="flex justify-between items-center mb-10">
-                <span className={`${montserrat.className} text-xl font-bold text-white`}>MT7<span className="text-red-500">.in</span></span>
-                <button onClick={closeMenu} className="p-2 -mr-2 text-gray-400 hover:text-white transition-colors">
+                <span
+                  className={`${montserrat.className} text-xl font-bold text-white`}
+                >
+                  MT7<span className="text-red-500">.in</span>
+                </span>
+                <button
+                  onClick={closeMenu}
+                  className="p-2 text-gray-400 hover:text-white"
+                >
                   <X size={24} />
                 </button>
               </div>
 
               <nav className="flex flex-col gap-1">
-                {NAV_LINKS.map(({ label, href }, i) => (
+                {SECTIONS.map(({ id, label }, i) => (
                   <motion.div
-                    key={label}
+                    key={id}
                     initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.03, duration: 0.2 }} // Faster stagger
+                    transition={{ delay: i * 0.04, duration: 0.25 }}
                   >
-                    <Link
-                      href={href}
+                    <a
+                      href={`#${id}`}
                       onClick={closeMenu}
                       className="group flex items-center justify-between py-4 border-b border-white/5"
                     >
-                      <span className={`${montserrat.className} text-base text-gray-300 group-active:text-white transition-colors`}>
+                      <span
+                        className={`${montserrat.className} text-base ${activeSection === id
+                            ? "text-white"
+                            : "text-gray-300 group-hover:text-white"
+                          } transition-colors`}
+                      >
                         {label}
                       </span>
-                      <ArrowRight size={18} className="text-red-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
-                    </Link>
+                      <ArrowRight
+                        size={18}
+                        className="text-red-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
+                      />
+                    </a>
                   </motion.div>
                 ))}
               </nav>
 
               <div className="mt-auto">
-                <Link 
-                  href="/register" 
+                <a
+                  href="#contact"
                   onClick={closeMenu}
                   className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-red-600 text-white font-bold active:scale-[0.98] transition-transform shadow-lg shadow-red-900/20"
                 >
                   Contact Us <ArrowRight size={18} />
-                </Link>
+                </a>
               </div>
             </motion.aside>
           </>
