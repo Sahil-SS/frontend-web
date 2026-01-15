@@ -70,17 +70,12 @@ const ClientsSection = () => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section
-      id="clients"
-      className="relative py-24 md:py-32 overflow-hidden"
-    >
+    <section id="clients" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background Glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           animate={
-            reduceMotion
-              ? { opacity: 0.35 }
-              : { opacity: [0.25, 0.45, 0.25] }
+            reduceMotion ? { opacity: 0.35 } : { opacity: [0.25, 0.45, 0.25] }
           }
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute inset-0 bg-gradient-to-r from-red-900/10 via-transparent to-orange-900/10 blur-[100px]"
@@ -89,30 +84,41 @@ const ClientsSection = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <p
-            className={`${montserrat.className} uppercase tracking-[0.3em] text-xs font-bold text-orange-500`}
-          >
-            Our Clients
-          </p>
+        <div className="flex flex-col items-start md:-mt-5 max-w-3xl mb-16">
+          <div className="inline-block">
+            <p
+              className={`${montserrat.className} uppercase tracking-[0.3em] text-xs font-bold text-orange-500 mb-2`}
+            >
+              Our Clients
+            </p>
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: "circOut", delay: 0.5 }}
+              className="h-[2px] bg-gradient-to-r from-orange-500 to-transparent"
+            />
+          </div>
+
+          {/* FONT SIZE EXACTLY MATCHED TO SERVICES (text-2xl md:text-3xl lg:text-4xl) */}
           <h2
-            className={`${montserrat.className} text-4xl md:text-6xl font-bold text-white mt-4`}
+            className={`
+                    ${montserrat.className} 
+                    text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-8 leading-[1.15]
+                    bg-gradient-to-r from-white via-[#ffae42] to-[#ff4500]
+                    bg-clip-text text-transparent
+                    drop-shadow-[0_4px_12px_rgba(255,69,0,0.2)]
+                  `}
           >
             Trusted by Industry Leaders
           </h2>
           <p
-            className={`${montserrat.className} text-gray-400 text-lg max-w-3xl mx-auto mt-6`}
+            className={`${montserrat.className} text-gray-400 text-lg max-w-3xl mx-auto`}
           >
             From early-stage startups to enterprises, we build systems that
             scale without surprises.
           </p>
-        </motion.div>
+        </div>
 
         {/* Stats */}
         <motion.div

@@ -1,9 +1,9 @@
-
 "use client";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Montserrat } from "next/font/google";
+import LightPillar from "../components/hero/LightPillar";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -11,7 +11,7 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-export default function HeroSection2() {
+export default function HeroSection() {
   const memberImages = [
     "/person1.png",
     "/person2.png",
@@ -22,15 +22,24 @@ export default function HeroSection2() {
   return (
     <section className="relative min-h-screen bg-[transparent] overflow-hidden flex items-center pt-24 pb-20 md:pb-0">
       {/* ================= BACKGROUND ENVIRONMENT ================= */}
-      <div className="absolute inset-0 z-0">
-        <Image
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* <Image
           src="/hero-bg.jpg"
           alt="Background"
           fill
           className="object-cover opacity-40"
           priority
+        /> */}
+        <LightPillar
+          topColor="#FFA500"
+          bottomColor="#E65100"
+          intensity={1.5} // Higher intensity looks better in 2D
+          pillarWidth={0.5} // 0.4 to 0.7 usually works best
+          pillarHeight={1.0} // Controls vertical stretch
+          pillarRotation={103}
+          className="opacity-70"
         />
-        
+
         {/* --- BIG FLAME SPHERE IN BACKGROUND ---
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
@@ -78,7 +87,7 @@ export default function HeroSection2() {
             }}
           />
         </div> */}
-        
+
         {/* --- LARGE BLENDED FLAME SPHERE --- */}
         {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div
@@ -122,7 +131,9 @@ export default function HeroSection2() {
             transition={{ duration: 0.8 }}
           >
             <div className="mb-6"></div>
-            <motion.h1 className={`${montserrat.className} text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6`}>
+            <motion.h1
+              className={`${montserrat.className} text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6`}
+            >
               <span className="block bg-gradient-to-r from-white via-[#ffae42] to-[#ff4500] bg-clip-text text-transparent drop-shadow-[0_4px_12px_rgba(255,69,0,0.2)]">
                 Grow business
               </span>
@@ -138,18 +149,23 @@ export default function HeroSection2() {
                 />
               </span>
             </motion.h1>
-            
-            <p className={`${montserrat.className} text-lg text-gray-200 font-light leading-relaxed mb-10 max-w-xl opacity-90`}>
-              Empower your business to thrive with expert advice tailored to your goals,
-              ensuring growth, innovation, and long-term success. Unlock your potential
-              with trusted guidance.
+
+            <p
+              className={`${montserrat.className} text-lg text-gray-200 font-light leading-relaxed mb-10 max-w-xl opacity-90`}
+            >
+              Empower your business to thrive with expert advice tailored to
+              your goals, ensuring growth, innovation, and long-term success.
+              Unlock your potential with trusted guidance.
             </p>
 
             <div className="flex flex-col gap-6 mb-12">
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-3">
                   {memberImages.map((src, i) => (
-                    <div key={i} className="relative w-9 h-9 rounded-full border-2 border-black overflow-hidden bg-red-900">
+                    <div
+                      key={i}
+                      className="relative w-9 h-9 rounded-full border-2 border-black overflow-hidden bg-red-900"
+                    >
                       <Image
                         src={src}
                         alt={`Member ${i + 1}`}
@@ -159,11 +175,18 @@ export default function HeroSection2() {
                     </div>
                   ))}
                 </div>
-                <p className={`${montserrat.className} text-gray-300 text-sm font-medium`}>Join 4,600+ members</p>
+                <p
+                  className={`${montserrat.className} text-gray-300 text-sm font-medium`}
+                >
+                  Join 4,600+ members
+                </p>
               </div>
 
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255, 69, 0, 0.4)" }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 0 20px rgba(255, 69, 0, 0.4)",
+                }}
                 whileTap={{ scale: 0.95 }}
                 className={`${montserrat.className} w-fit px-8 py-4 bg-[#ff4500] text-white font-semibold rounded-xl transition-all shadow-lg shadow-red-900/20`}
               >
@@ -178,8 +201,12 @@ export default function HeroSection2() {
                 { value: "5.0", label: "Rating" },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
-                  <div className="text-2xl font-bold text-[#ffae42]">{stat.value}</div>
-                  <div className="text-gray-400 text-xs mt-1 uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-2xl font-bold text-[#ffae42]">
+                    {stat.value}
+                  </div>
+                  <div className="text-gray-400 text-xs mt-1 uppercase tracking-wider">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
@@ -204,10 +231,14 @@ export default function HeroSection2() {
             {/* RESPONSIVE 4.6K CONNECTED CARD - Positioned safer for phone screens */}
             <div className="absolute -bottom-8 md:-bottom-5 -left-4 md:-left-5 w-28 h-28 md:w-36 md:h-36 flex items-center justify-center">
               <div className="absolute inset-0 rounded-2xl border-2 md:border-4 border-[#ff4500]/20 blur-[2px] animate-pulse" />
-              
+
               <div className="relative w-full h-full rounded-2xl bg-black/90 backdrop-blur-xl border-2 md:border-4 border-[#ff4500]/50 p-4 md:p-6 shadow-[0_0_40px_rgba(255,69,0,0.25)] flex flex-col justify-center text-center lg:text-left">
-                <div className="text-gray-300 text-[10px] md:text-[11px] mb-1 font-medium tracking-wide">Connected</div>
-                <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#ff4500] drop-shadow-[0_0_12px_rgba(255,69,0,0.6)] whitespace-nowrap">4.6K+</div>
+                <div className="text-gray-300 text-[10px] md:text-[11px] mb-1 font-medium tracking-wide">
+                  Connected
+                </div>
+                <div className="text-xl md:text-2xl lg:text-3xl font-bold text-[#ff4500] drop-shadow-[0_0_12px_rgba(255,69,0,0.6)] whitespace-nowrap">
+                  4.6K+
+                </div>
               </div>
             </div>
           </motion.div>

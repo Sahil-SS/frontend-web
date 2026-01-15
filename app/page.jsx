@@ -28,7 +28,7 @@ const page = () => {
     <>
 
     {/* Final Sections*/}
-      <Navbar /> {/* Done */}
+      <Navbar /> 
       <HeroSection />
       <LogoSection />
       <ClientsSection />
@@ -42,7 +42,6 @@ const page = () => {
     {/* Final Sections End her*/}
 
 
-    
       {/* <Hero />   */}
       {/* Logo Sections there are three files see which one is looking good*/}
       {/* <OurNetworkSection /> */}
