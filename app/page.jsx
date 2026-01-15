@@ -9,7 +9,6 @@ import FlowDiagram from "@/components/FlowDiagram";
 import FlowSection from "@/components/FlowSection";
 import FlowSection1 from "@/components/FlowSection1";
 import FlowSection2 from "@/components/FlowSection2";
-import Footer from "@/components/Footer";
 import Footer1 from "@/components/Footer1";
 import Hero from "@/components/hero/Hero";
 import HeroSection from "@/components/HeroSection";
@@ -60,9 +59,6 @@ const page = () => {
       {/* <Comparison /> */}
       {/* <ComparisonTable /> */}
       {/* <CompSection /> */}
-
-      {/* Footers there are two files see which one is looking good*/}
-      {/* <Footer /> */}
     </>
   );
 };
