@@ -20,7 +20,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-[transparent] overflow-hidden flex items-center pt-24 pb-20 md:pb-0">
+    <section className="relative min-h-screen bg-transparent overflow-hidden flex items-center pt-24 pb-20 md:pb-0">
       {/* ================= BACKGROUND ENVIRONMENT ================= */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* <Image
