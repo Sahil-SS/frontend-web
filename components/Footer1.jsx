@@ -1,17 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Montserrat } from "next/font/google";
 import { 
   Mail, 
   Phone, 
-  MapPin, 
   Instagram, 
   Twitter, 
   Linkedin, 
   Facebook,
-  ArrowUp,
   ArrowRight
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -22,26 +20,26 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+// Real WhatsApp SVG Path Component
+const WhatsAppIcon = ({ size = 18, className = "" }) => (
+  <svg 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    className={className}
+  >
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+  </svg>
+);
+
 export default function Footer() {
   const [email, setEmail] = useState("");
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
     console.log("Subscribed:", email);
     setEmail("");
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const footerLinks = {
@@ -70,280 +68,131 @@ export default function Footer() {
     { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
     { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
     { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+    { isWhatsApp: true, href: "https://wa.me/yournumber", label: "WhatsApp" },
   ];
 
   return (
     <>
-      {/* Fade In Transition */}
-      <div className="relative h-8 md:h-12 -mt-8 md:-mt-12 overflow-hidden pointer-events-none">
-        <div className="absolute bottom-0 left-0 right-0 h-8 md:h-12 bg-gradient-to-t from-black via-black/90 to-transparent" />
+      <div className="relative h-12 -mt-12 overflow-hidden pointer-events-none">
+        <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black to-transparent" />
       </div>
 
-      <footer className="relative bg-black pt-8 md:pt-12 pb-6 md:pb-8 overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Subtle moving gradient */}
-          <motion.div
-            initial={{ x: "-50%", y: "-50%" }}
-            animate={{ x: ["-50%", "50%", "-50%"], y: ["-50%", "50%", "-50%"] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-r from-red-500/5 to-transparent rounded-full blur-3xl opacity-20"
-          />
-          
-          {/* Floating particles */}
-          <div className="absolute inset-0">
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ y: 0, opacity: 0.1 }}
-                animate={{ 
-                  y: [0, -20, 0],
-                  opacity: [0.1, 0.2, 0.1]
-                }}
-                transition={{
-                  duration: 3 + i * 0.5,
-                  delay: i * 0.2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute w-[1px] h-[1px] bg-red-500 rounded-full"
-                style={{
-                  left: `${10 + (i * 10)}%`,
-                  top: `${20 + (i * 5)}%`,
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Grid pattern overlay */}
-          <div 
-            className="absolute inset-0 opacity-[0.02]"
-            style={{
-              backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px),
-                               linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-              backgroundSize: '50px 50px',
-            }}
-          />
+      <footer className="relative bg-black pt-16 pb-8 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[120px] opacity-20" />
         </div>
         
-        {/* Top Accent Line */}
-        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-red-500/40 to-transparent" />
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Main Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-6 mb-8 md:mb-10">
-            {/* Brand & Newsletter - Takes 2 cols on md, 3 on lg */}
-            <div className="md:col-span-2 lg:col-span-3">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="mb-6 md:mb-0"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
-                  <Link 
-                    href="/" 
-                    className={`${montserrat.className} inline-flex items-baseline gap-1 text-2xl md:text-3xl font-bold text-white group`}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+            
+            <div className="lg:col-span-7 flex flex-col gap-8">
+              <div className="flex flex-wrap items-center gap-6 md:gap-10">
+                <Link 
+                  href="/" 
+                  className={`${montserrat.className} text-2xl md:text-3xl font-bold text-white group`}
+                >
+                  <span className="relative">
+                    MT7<span className="text-red-500">.in</span>
+                    <motion.span className="absolute -bottom-1 left-0 h-[2px] bg-red-500 w-0 group-hover:w-full transition-all duration-300" />
+                  </span>
+                </Link>
+
+                {/* Social Icons Container */}
+                <div className="flex items-center gap-3">
+                  {socialLinks.map((social) => (
+                    <motion.a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-red-500/50 hover:bg-red-500/10 transition-all"
+                      whileHover={{ y: -3 }}
+                    >
+                      {social.isWhatsApp ? (
+                        <WhatsAppIcon className="text-gray-400 hover:text-white transition-colors" />
+                      ) : (
+                        <social.icon className="text-gray-400 hover:text-white transition-colors" size={18} />
+                      )}
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-gray-400 text-base leading-relaxed max-w-xl">
+                Building cutting-edge digital solutions that drive business growth. 
+                We specialize in scaling platforms and crafting intuitive user experiences.
+              </p>
+
+              <div className="flex flex-col gap-4">
+                <h3 className="text-white font-semibold flex items-center gap-2 text-base">
+                  <Mail size={18} className="text-red-500" />
+                  Stay updated with our newsletter
+                </h3>
+                
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-lg">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email address"
+                    className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-red-500 transition-all"
+                    required
+                  />
+                  <motion.button
+                    type="submit"
+                    className="px-8 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-500 transition-all flex items-center justify-center gap-2 group shadow-lg shadow-red-900/20"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <span className="relative">
-                      MT7
-                      <motion.span 
-                        className="absolute -bottom-1 left-0 h-[2px] bg-red-500"
-                        initial={{ width: 0 }}
-                        whileHover={{ width: "100%" }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </span>
-                    <span className="text-red-500">.in</span>
-                  </Link>
-                  
-                  {/* Social Links - Top on mobile, inline on desktop */}
-                  <div className="flex items-center gap-3">
-                    {socialLinks.map((social) => (
-                      <motion.a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg bg-black/50 border border-white/10 hover:border-red-500/50 hover:bg-white/5 transition-all duration-200 group"
-                        aria-label={social.label}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <social.icon className="text-gray-400 group-hover:text-white transition-colors" size={16} />
-                      </motion.a>
-                    ))}
-                  </div>
-                </div>
-                
-                <p className="text-gray-400 text-sm md:text-base mb-6 leading-relaxed max-w-2xl">
-                  Building cutting-edge digital solutions that drive business growth. 
-                  Let's create something exceptional together.
-                </p>
-                
-                {/* Newsletter Subscription */}
-                <div>
-                  <h3 className="text-white font-semibold mb-3 flex items-center gap-2 text-sm md:text-base">
-                    <Mail size={16} className="text-red-500" />
-                    Stay updated with our newsletter
-                  </h3>
-                  <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-xl">
-                    <motion.input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Your email address"
-                      className="flex-1 px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition-all backdrop-blur-sm"
-                      required
-                      whileFocus={{ scale: 1.02 }}
-                    />
-                    <motion.button
-                      type="submit"
-                      className="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-500 transition-all duration-200 shadow-lg shadow-red-900/30 text-sm whitespace-nowrap flex items-center gap-2 group"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      Subscribe
-                      <ArrowRight size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                    </motion.button>
-                  </form>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Links Columns - Stack on mobile, 3 cols on desktop */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 md:gap-4 md:col-span-3 lg:col-span-2">
-              {Object.entries(footerLinks).map(([category, links], colIndex) => (
-                <motion.div
-                  key={category}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: colIndex * 0.1 }}
-                >
-                  <h3 className={`${montserrat.className} text-white font-semibold text-xs uppercase tracking-wider mb-3 md:mb-4`}>
-                    {category}
-                  </h3>
-                  <ul className="space-y-2 md:space-y-3">
-                    {links.map((link, index) => (
-                      <motion.li
-                        key={link.label}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.03 }}
-                      >
-                        <Link
-                          href={link.href}
-                          className="group flex items-center gap-2 text-gray-400 hover:text-white transition-all duration-200"
-                        >
-                          <span className="relative overflow-hidden">
-                            {link.label}
-                            <motion.span 
-                              className="absolute bottom-0 left-0 h-[1px] w-0 bg-red-500"
-                              whileHover={{ width: "100%" }}
-                              transition={{ duration: 0.3 }}
-                            />
-                          </span>
-                          <motion.span
-                            className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200"
-                          >
-                            <ArrowRight size={12} className="text-red-500" />
-                          </motion.span>
-                        </Link>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Animated Divider */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="h-px bg-gradient-to-r from-transparent via-red-500/20 via-white/10 to-transparent my-6 md:my-8 origin-left"
-          />
-
-          {/* Bottom Section */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-            {/* Contact Info */}
-            <div className="flex flex-wrap justify-center md:justify-start items-center gap-4 md:gap-6 text-xs md:text-sm">
-              {[
-                { icon: Phone, text: "+1 (555) 123-4567" },
-                { icon: Mail, text: "contact@mt7.in" },
-                { icon: MapPin, text: "San Francisco, CA" },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
-                >
-                  <item.icon size={12} className="text-red-500" />
-                  <span>{item.text}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Copyright */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4 text-xs">
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="text-gray-500 text-center md:text-left"
-              >
-                © {new Date().getFullYear()} MT7.in. All rights reserved.
-              </motion.p>
-              <div className="hidden sm:flex items-center gap-3">
-                {["Privacy", "Terms", "Cookies"].map((item, index) => (
-                  <React.Fragment key={item}>
-                    {index > 0 && <span className="text-gray-700">•</span>}
-                    <Link 
-                      href={`/${item.toLowerCase()}`}
-                      className="text-gray-500 hover:text-gray-300 transition-colors group relative"
-                    >
-                      {item}
-                      <motion.span 
-                        className="absolute -bottom-0.5 left-0 h-[1px] w-0 bg-red-500/50"
-                        whileHover={{ width: "100%" }}
-                        transition={{ duration: 0.2 }}
-                      />
-                    </Link>
-                  </React.Fragment>
-                ))}
+                    Subscribe
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </motion.button>
+                </form>
               </div>
             </div>
-          </div>
 
-          {/* Mobile-only legal links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-4 sm:hidden"
-          >
-            <div className="flex justify-center items-center gap-4 text-xs">
-              {["Privacy", "Terms", "Cookies"].map((item, index) => (
-                <React.Fragment key={item}>
-                  {index > 0 && <span className="text-gray-700">•</span>}
-                  <Link 
-                    href={`/${item.toLowerCase()}`}
-                    className="text-gray-500 hover:text-gray-300 transition-colors group flex items-center gap-1"
-                  >
-                    {item}
-                    <ArrowRight size={10} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </Link>
-                </React.Fragment>
+            <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-8">
+              {Object.entries(footerLinks).map(([category, links]) => (
+                <div key={category}>
+                  <h3 className={`${montserrat.className} text-white font-bold text-xs uppercase tracking-widest mb-6`}>
+                    {category}
+                  </h3>
+                  <ul className="flex flex-col gap-4">
+                    {links.map((link) => (
+                      <li key={link.label}>
+                        <Link
+                          href={link.href}
+                          className="text-gray-400 hover:text-white text-sm transition-colors relative group"
+                        >
+                          {link.label}
+                          <span className="absolute left-0 -bottom-1 w-0 h-[1px] bg-red-500 group-hover:w-full transition-all duration-300" />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
+
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
+
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+              <div className="flex items-center gap-2 group cursor-pointer hover:text-white transition-colors">
+                <Phone size={14} className="text-red-500" />
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div className="flex items-center gap-2 group cursor-pointer hover:text-white transition-colors">
+                <Mail size={14} className="text-red-500" />
+                <span>contact@mt7.in</span>
+              </div>
+            </div>
+
+            <div className="text-gray-500 text-xs text-center">
+              © {new Date().getFullYear()} MT7.in. All rights reserved.
+            </div>
+          </div>
         </div>
       </footer>
     </>
