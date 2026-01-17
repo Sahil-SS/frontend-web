@@ -33,10 +33,10 @@ const AboutSection = () => {
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden" />
 
-      {/* ================= CONTENT CONTAINER ================= */}
-      <div className="relative z-30 w-full min-w-[80vw] max-w-[1400px] px-14 grid md:grid-cols-2 gap-16 items-center">
+      {/* Adjusted px-6 for mobile to match FlowSection */}
+      <div className="relative z-30 w-full max-w-[1300px] px-6 md:px-14 grid md:grid-cols-2 gap-16 items-center">
         
-        {/* LEFT CONTENT - Added -mt-6 to shift text up by ~10% */}
+        {/* LEFT CONTENT */}
         <div className="flex flex-col items-start md:-mt-10">
           <div className="inline-block">
             <p className={`${montserrat.className} uppercase tracking-[0.3em] text-xs font-bold text-orange-500 mb-2`}>
@@ -51,7 +51,6 @@ const AboutSection = () => {
             />
           </div>
 
-          {/* Reduced mt-4 to mt-2 for a tighter upward pull */}
           <h2 className={`
             ${montserrat.className}
             text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-8 leading-[1.15]
@@ -75,7 +74,7 @@ const AboutSection = () => {
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative rounded-3xl overflow-hidden aspect-video border border-white/10 bg-zinc-900/50 backdrop-blur-md group max-w-[85%] mx-auto"
+            className="relative rounded-3xl overflow-hidden aspect-video border border-white/10 bg-zinc-900/50 backdrop-blur-md group max-w-[100%] md:max-w-[85%] mx-auto"
           >
             <Image
               src="/aboutus.png"
@@ -87,7 +86,7 @@ const AboutSection = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-4 mt-8 max-w-[85%] mx-auto">
+          <div className="grid grid-cols-2 gap-4 mt-8 max-w-[100%] md:max-w-[85%] mx-auto">
             {[
               "Scalable Infrastructure",
               "Secure by Design",

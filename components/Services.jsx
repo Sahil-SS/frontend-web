@@ -229,7 +229,8 @@ const Services = () => {
 
   return (
     <section id="services" className="relative py-20 bg-transparent overflow-hidden flex justify-center w-full">
-      <div className="relative z-30 w-full max-w-[1400px] px-14">
+      {/* Container max-width and px changed to match FlowSection on mobile */}
+      <div className="relative z-30 w-full max-w-[1300px] px-6 md:px-14">
         
         {/* SECTION HEADER */}
         <div className="flex flex-col items-start md:-mt-5 max-w-3xl mb-16">
@@ -254,7 +255,7 @@ const Services = () => {
         {/* MAIN CONTENT GRID */}
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           
-          {/* LEFT SIDE: 4 BENTO BOXES (Stacked in 2x2) */}
+          {/* LEFT SIDE: 4 BENTO BOXES */}
           <motion.div layout className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
             {services.map((service, i) => (
               <motion.div
@@ -303,7 +304,7 @@ const Services = () => {
               </motion.div>
             ))}
 
-            {/* FULL WIDTH CALL TO ACTION CARD ON LEFT */}
+            {/* FULL WIDTH CTA CARD */}
             <motion.div
               layout
               className="md:col-span-2 p-6 rounded-[1.2rem] bg-gradient-to-r from-orange-900/20 to-red-900/20 border border-orange-500/20 flex flex-col md:flex-row items-center justify-between gap-4 mt-2"
@@ -318,7 +319,7 @@ const Services = () => {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT SIDE: IMAGE BOX WITH BENDED BORDERS */}
+          {/* RIGHT SIDE: IMAGE BOX */}
           <div className="lg:col-span-5 relative h-full min-h-[400px]">
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
@@ -327,15 +328,12 @@ const Services = () => {
               className="relative w-full h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl"
             >
               <Image 
-                src="/services.png" // Replace with your image path
+                src="/services.png"
                 alt="Services Visual"
                 fill
                 className="object-cover opacity-80"
               />
-              {/* Overlay Gradient for depth */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              
-              {/* Decorative bended corner element */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 blur-3xl rounded-full" />
             </motion.div>
           </div>
