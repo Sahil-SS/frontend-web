@@ -30,7 +30,7 @@ export default function HeroSection() {
           className="object-cover opacity-40"
           priority
         /> */}
-        <LightPillar
+        {/* <LightPillar
           topColor="#FFA500"
           bottomColor="#E65100"
           intensity={1.5} // Higher intensity looks better in 2D
@@ -38,7 +38,7 @@ export default function HeroSection() {
           pillarHeight={1.0} // Controls vertical stretch
           pillarRotation={103}
           className="opacity-70"
-        />
+        /> */}
 
         {/* --- BIG FLAME SPHERE IN BACKGROUND ---
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

@@ -1,93 +1,93 @@
-// components/GlobalBackground.jsx
-"use client";
+// // components/GlobalBackground.jsx
+// "use client";
 
-import React, { useEffect, useCallback } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+// import React, { useEffect, useCallback } from "react";
+// import { motion, useMotionValue, useSpring } from "framer-motion";
 
-const GlobalBackground = () => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+// const GlobalBackground = () => {
+//   const mouseX = useMotionValue(0);
+//   const mouseY = useMotionValue(0);
   
-  const springConfig = { damping: 25, stiffness: 150 };
-  const dx = useSpring(mouseX, springConfig);
-  const dy = useSpring(mouseY, springConfig);
+//   const springConfig = { damping: 25, stiffness: 150 };
+//   const dx = useSpring(mouseX, springConfig);
+//   const dy = useSpring(mouseY, springConfig);
 
-  const handleMouseMove = useCallback((e) => {
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
-  }, [mouseX, mouseY]);
+//   const handleMouseMove = useCallback((e) => {
+//     mouseX.set(e.clientX);
+//     mouseY.set(e.clientY);
+//   }, [mouseX, mouseY]);
 
-  useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [handleMouseMove]);
+//   useEffect(() => {
+//     window.addEventListener("mousemove", handleMouseMove);
+//     return () => window.removeEventListener("mousemove", handleMouseMove);
+//   }, [handleMouseMove]);
 
-  return (
-    // Added bg-black here to ensure the glows pop
-    <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 bg-[#050202]">
-      {/* Interactive Cursor Glow */}
-      <motion.div
-        style={{
-          left: dx,
-          top: dy,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        className="absolute w-[600px] h-[600px] bg-orange-600/15 blur-[120px] rounded-full z-10 will-change-transform"
-      />
+//   return (
+//     // Added bg-black here to ensure the glows pop
+//     <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 bg-[#050202]">
+//       {/* Interactive Cursor Glow */}
+//       <motion.div
+//         style={{
+//           left: dx,
+//           top: dy,
+//           translateX: "-50%",
+//           translateY: "-50%",
+//         }}
+//         className="absolute w-[600px] h-[600px] bg-orange-600/15 blur-[120px] rounded-full z-10 will-change-transform"
+//       />
 
-      {/* Static Atmospheric Glows */}
-      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-red-900/20 blur-[150px] rounded-full" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-orange-900/10 blur-[150px] rounded-full" />
+//       {/* Static Atmospheric Glows */}
+//       <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-red-900/20 blur-[150px] rounded-full" />
+//       <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-orange-900/10 blur-[150px] rounded-full" />
 
-      {/* --- EDITED SECTION: REALISTIC FIRE EMBERS --- */}
-      {/* Increased count slightly for better density */}
-      {[...Array(20)].map((_, i) => {
-        // Generate some random variations for natural look
-        const randomDuration = 5 + Math.random() * 5; // Between 5s and 10s rise time
-        const randomDelay = Math.random() * 5; // Staggered start
-        const randomScale = 0.8 + Math.random() * 0.5; // Varying sizes
-        const randomXDrift = (Math.random() - 0.5) * 150; // Drift left or right during rise
+//       {/* --- EDITED SECTION: REALISTIC FIRE EMBERS --- */}
+//       {/* Increased count slightly for better density */}
+//       {[...Array(20)].map((_, i) => {
+//         // Generate some random variations for natural look
+//         const randomDuration = 5 + Math.random() * 5; // Between 5s and 10s rise time
+//         const randomDelay = Math.random() * 5; // Staggered start
+//         const randomScale = 0.8 + Math.random() * 0.5; // Varying sizes
+//         const randomXDrift = (Math.random() - 0.5) * 150; // Drift left or right during rise
 
-        return (
-        <motion.div
-          key={i}
-          // Start just below the screen visible area
-          initial={{ opacity: 0, y: "105vh", scale: 0 }}
-          animate={{ 
-            // Lifecycle: Burst bright -> dim slightly while rising -> fade out completely
-            opacity: [0, 1, 0.8, 0], 
-            // Movement: Rise from bottom to near top of screen
-            y: ["105vh", "10vh"],
-            // Drift: Add horizontal wavering due to heat turbulence
-            x: [0, randomXDrift / 2, randomXDrift],
-            // Burnout: Grow rapidly at start, shrink as they cool/die
-            scale: [0, randomScale, randomScale * 0.5, 0]
-          }}
-          transition={{
-            duration: randomDuration,
-            repeat: Infinity,
-            delay: randomDelay,
-            // easeOut makes them start fast (hot thermal updraft) and slow down near top
-            ease: "easeOut", 
-          }}
-          // Styling: Small size, bright core, intense fiery glow
-          className="absolute w-[3px] h-[3px] bg-amber-200 rounded-full will-change-transform"
-          style={{
-            // Spread them horizontally across the bottom center
-            left: `${20 + Math.random() * 60}%`, 
-            // Intense, multi-layered fiery shadow + slight blur for gaseous look
-            boxShadow: "0 0 8px 2px rgba(255, 80, 0, 0.8), 0 0 16px 4px rgba(255, 0, 0, 0.4)",
-            filter: 'blur(0.5px)'
-          }}
-        />
-      )})}
-       {/* --- END EDITED SECTION --- */}
-    </div>
-  );
-};
+//         return (
+//         <motion.div
+//           key={i}
+//           // Start just below the screen visible area
+//           initial={{ opacity: 0, y: "105vh", scale: 0 }}
+//           animate={{ 
+//             // Lifecycle: Burst bright -> dim slightly while rising -> fade out completely
+//             opacity: [0, 1, 0.8, 0], 
+//             // Movement: Rise from bottom to near top of screen
+//             y: ["105vh", "10vh"],
+//             // Drift: Add horizontal wavering due to heat turbulence
+//             x: [0, randomXDrift / 2, randomXDrift],
+//             // Burnout: Grow rapidly at start, shrink as they cool/die
+//             scale: [0, randomScale, randomScale * 0.5, 0]
+//           }}
+//           transition={{
+//             duration: randomDuration,
+//             repeat: Infinity,
+//             delay: randomDelay,
+//             // easeOut makes them start fast (hot thermal updraft) and slow down near top
+//             ease: "easeOut", 
+//           }}
+//           // Styling: Small size, bright core, intense fiery glow
+//           className="absolute w-[3px] h-[3px] bg-amber-200 rounded-full will-change-transform"
+//           style={{
+//             // Spread them horizontally across the bottom center
+//             left: `${20 + Math.random() * 60}%`, 
+//             // Intense, multi-layered fiery shadow + slight blur for gaseous look
+//             boxShadow: "0 0 8px 2px rgba(255, 80, 0, 0.8), 0 0 16px 4px rgba(255, 0, 0, 0.4)",
+//             filter: 'blur(0.5px)'
+//           }}
+//         />
+//       )})}
+//        {/* --- END EDITED SECTION --- */}
+//     </div>
+//   );
+// };
 
-export default GlobalBackground;
+// export default GlobalBackground;
 
 // "use client";
 
@@ -180,3 +180,107 @@ export default GlobalBackground;
 // };
 
 // export default GlobalBackground;
+
+"use client";
+
+import React, { useEffect, useCallback, useMemo } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import LightPillar from "./hero/LightPillar"; // Adjust path as needed
+
+const GlobalBackground = () => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 150 };
+  const dx = useSpring(mouseX, springConfig);
+  const dy = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = useCallback((e) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  }, [mouseX, mouseY]);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [handleMouseMove]);
+
+  // Performance: Memoize particles so they don't regenerate on every mouse move
+  const emberParticles = useMemo(() => {
+    return [...Array(20)].map((_, i) => ({
+      id: i,
+      randomDuration: 5 + Math.random() * 5,
+      randomDelay: Math.random() * 5,
+      randomScale: 0.8 + Math.random() * 0.5,
+      randomXDrift: (Math.random() - 0.5) * 150,
+      left: `${20 + Math.random() * 60}%`,
+    }));
+  }, []);
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 bg-[#050202]">
+      
+      {/* ================= LIGHT PILLAR (One instance for all sections) ================= */}
+      {/* Positioned absolutely within the fixed background. 
+          As the user scrolls, the pillar stays fixed, 
+          making it feel like a massive world-object. */}
+      <div className="absolute inset-0 z-0">
+        <LightPillar
+          topColor="#FFA500"
+          bottomColor="#E65100"
+          intensity={1.1} // Reduced slightly for global visibility
+          pillarWidth={0.5}
+          pillarHeight={1.0}
+          pillarRotation={103}
+          className="opacity-50" // High performance blend
+        />
+      </div>
+
+      {/* Interactive Cursor Glow */}
+      <motion.div
+        style={{
+          left: dx,
+          top: dy,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        className="absolute w-[600px] h-[600px] bg-orange-600/15 blur-[120px] rounded-full z-10 will-change-transform"
+      />
+
+      {/* Static Atmospheric Glows */}
+      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-red-900/20 blur-[150px] rounded-full" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-orange-900/10 blur-[150px] rounded-full" />
+
+      {/* Realistic Fire Embers */}
+      {emberParticles.map((p) => (
+        <motion.div
+          key={p.id}
+          initial={{ opacity: 0, y: "105vh", scale: 0 }}
+          animate={{ 
+            opacity: [0, 1, 0.8, 0], 
+            y: ["105vh", "10vh"],
+            x: [0, p.randomXDrift / 2, p.randomXDrift],
+            scale: [0, p.randomScale, p.randomScale * 0.5, 0]
+          }}
+          transition={{
+            duration: p.randomDuration,
+            repeat: Infinity,
+            delay: p.randomDelay,
+            ease: "easeOut", 
+          }}
+          className="absolute w-[3px] h-[3px] bg-amber-200 rounded-full will-change-transform"
+          style={{
+            left: p.left,
+            boxShadow: "0 0 8px 2px rgba(255, 80, 0, 0.8), 0 0 16px 4px rgba(255, 0, 0, 0.4)",
+            filter: 'blur(0.5px)'
+          }}
+        />
+      ))}
+
+      {/* Added a bottom vignette to ground the sections */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+    </div>
+  );
+};
+
+export default GlobalBackground;
